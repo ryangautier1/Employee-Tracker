@@ -51,9 +51,15 @@ function updateMenu() {
                 "Update employee manager",
                 "Delete department",
                 "Delete role",
-                "Delete employee",
-                ""
+                "Delete employee"
             ]
         }
     ])
+}
+
+module.exports = {
+    mainMenu,
+    addMenu,
+    viewMenu,
+    updateMenu
 }
