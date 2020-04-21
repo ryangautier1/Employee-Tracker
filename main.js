@@ -12,16 +12,16 @@ async function init() {
 init();
 
 async function mainMenu() {
-    const answer = await questions.mainMenu();
-    switch (answer) {
+    var answer = await questions.mainMenu();
+    switch (answer.choice) {
         case "Add":
-            // code
+            answer = await questions.addMenu();
         break;
         case "View":
-            // code
+            answer = await questions.viewMenu();
         break;
-        case "Update":
-            // code
+        case "Update/Delete":
+            answer = await questions.updateMenu();
         break;
         case "Exit":
             // code

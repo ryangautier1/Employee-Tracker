@@ -14,6 +14,7 @@ function mainMenu() {
     ])
 }
 
+// Add Questions
 function addMenu() {
     return inquirer.prompt([
         {
@@ -22,11 +23,13 @@ function addMenu() {
             message: "What would you like to add?",
             choices: ["Add department",
                 "Add role",
-                "Add employee"]
+                "Add employee",
+                "Back to main menu"]
         }
     ])
 }
 
+// View Questions
 function viewMenu() {
     return inquirer.prompt([
         {
@@ -37,10 +40,13 @@ function viewMenu() {
                 "View roles",
                 "View an individual employee",
                 "View employees by manager",
-                "View total utilized budget of a department"]
+                "View total utilized budget of a department",
+                "Back to main menu"]
         }
     ])
 }
+
+// Update Questions
 function updateMenu() {
     return inquirer.prompt([
         {
@@ -51,7 +57,8 @@ function updateMenu() {
                 "Update employee manager",
                 "Delete department",
                 "Delete role",
-                "Delete employee"
+                "Delete employee",
+                "Back to main menu"
             ]
         }
     ])
