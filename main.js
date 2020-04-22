@@ -20,11 +20,11 @@ async function mainMenu() {
             break;
         case "View":
             answer = await questions.viewMenu();
-            handleView();
+            handleView(answer.choice);
             break;
         case "Update/Delete":
             answer = await questions.updateMenu();
-            handleUpdate();
+            handleUpdate(answer.choice);
             break;
         case "Exit":
             // code
@@ -53,6 +53,35 @@ async function handleAdd(choice) {
     }
 }
 
-async function handleUpdate() {
-
+async function handleUpdate(choice) {
+    switch (choice) {
+        case "Update employee role":
+            // get roles here
+            // var roles = 
+            var answer = questions.whichRole(roles, "update");
+            break;
+        case "Update employee manager":
+            // get managers here
+            // var managers = 
+            var answer = questions.whichManager(managers);
+            break;
+        case "Delete department":
+            // get departments here
+            // var departments =
+            var answer = questions.whichDepartment();
+            break;
+        case "Delete role":
+            // get roles here
+            // var roles = 
+            var answer = questions.whichRole(roles, "delete");
+            break;
+        case "Delete employee":
+            // get employees here
+            // var employees = 
+            var answer = questions.whichEmployee(employees);
+            break;
+        case "Back to main menu":
+            mainMenu();
+            break;
+    }
 }

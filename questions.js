@@ -119,6 +119,50 @@ function updateMenu() {
     ])
 }
 
+function whichRole(roles, action) {
+    return inquirer.prompt([
+        {
+            type: "list",
+            name: "choice",
+            message: `Which role would you like to ${action}?`,
+            choices: [roles]
+        }
+    ])
+}
+
+function whichManager(managers) {
+    return inquirer.prompt([
+        {
+            type: "list",
+            name: "choice",
+            message: "Which manager would you like to update?",
+            choices: [managers]
+        }
+    ])
+}
+
+function whichDepartment(departments) {
+    return inquirer.prompt([
+        {
+            type: "list",
+            name: "choice",
+            message: "Which department would you like to delete?",
+            choices: [departments]
+        }
+    ])
+}
+
+function whichEmployee(employees) {
+    return inquirer.prompt([
+        {
+            type: "list",
+            name: "choice",
+            message: "Which employee would you like to delete?",
+            choices: [employees]
+        }
+    ])
+}
+
 module.exports = {
     mainMenu,
     addMenu,
@@ -126,5 +170,9 @@ module.exports = {
     updateMenu,
     addRoleQuestions,
     addEmployeeQuestions,
-    addDepartmentQuestions
+    addDepartmentQuestions,
+    whichRole,
+    whichManager,
+    whichDepartment,
+    whichEmployee
 }
