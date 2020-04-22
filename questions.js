@@ -123,5 +123,8 @@ module.exports = {
     mainMenu,
     addMenu,
     viewMenu,
-    updateMenu
+    updateMenu,
+    addRoleQuestions,
+    addEmployeeQuestions,
+    addDepartmentQuestions
 }
