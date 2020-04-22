@@ -58,6 +58,8 @@ async function handleView(choice) {
             mainMenu();
             break;
         case "View total utilized budget of a department":
+            // get departments here
+            var answer = whichDepartment(departments, "view the budget information of")
             // add salaries together by department or something
             break;
         case "Back to main menu":
@@ -93,12 +95,12 @@ async function handleUpdate(choice) {
         case "Update employee manager":
             // get managers here
             // var managers = 
-            var answer = questions.whichManager(managers);
+            var answer = questions.whichManager(managers, "update");
             break;
         case "Delete department":
             // get departments here
             // var departments =
-            var answer = questions.whichDepartment(departments);
+            var answer = questions.whichDepartment(departments, "delete");
             break;
         case "Delete role":
             // get roles here

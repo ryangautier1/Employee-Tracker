@@ -141,12 +141,12 @@ function whichManager(managers, action) {
     ])
 }
 
-function whichDepartment(departments) {
+function whichDepartment(departments, action) {
     return inquirer.prompt([
         {
             type: "list",
             name: "choice",
-            message: "Which department would you like to delete?",
+            message: `Which department would you like to ${action}?`,
             choices: [departments]
         }
     ])
