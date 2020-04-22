@@ -27,13 +27,31 @@ async function mainMenu() {
             handleUpdate(answer.choice);
             break;
         case "Exit":
-            // code
             break;
     }
 }
 
-async function handleView() {
-
+async function handleView(choice) {
+    switch (choice) {
+        case "View departments":
+            //
+            break;
+        case "View roles":
+            //
+            break;
+        case "View an individual employee":
+            //
+            break;
+        case ("View employees by manager"):
+            //
+            break;
+        case ("View total utilized budget of a department"):
+            //
+            break;
+        case ("Back to main menu"):
+            //
+            break;
+    }
 }
 
 async function handleAdd(choice) {
@@ -68,7 +86,7 @@ async function handleUpdate(choice) {
         case "Delete department":
             // get departments here
             // var departments =
-            var answer = questions.whichDepartment();
+            var answer = questions.whichDepartment(departments);
             break;
         case "Delete role":
             // get roles here
