@@ -49,6 +49,41 @@ function addRoleQuestions() {
     ])
 }
 
+function addEmployeeQuestions() {
+    return inquirer.prompt([
+        {
+            type: "input",
+            message: "Enter the first name of the employee:",
+            name: "first_name"
+        },
+        {
+            type: "input",
+            message: "Enter the last name of the employee:",
+            name: "last_name"
+        },
+        {
+            type: "input",
+            message: "Enter the role ID:",
+            name: "role_id"
+        },
+        {
+            type: "input",
+            message: "Enter the manager ID:",
+            name: "manager_id"
+        }
+    ])
+}
+
+function addDepartmentQuestions() {
+    return inquirer.prompt([
+        {
+            type: "input",
+            message: "Enter the name of the department:",
+            name: "name"
+        }
+    ])
+}
+
 // View Questions
 function viewMenu() {
     return inquirer.prompt([
