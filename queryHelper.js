@@ -1,15 +1,15 @@
 const connection = require("./connection");
 
 function getEmployees() {
-    return connection.query("SELECT * FROM employee",)
+    return connection.query("SELECT * FROM employee")
 }
 
 function getRoles() {
-    return connection.query("SELECT * FROM role",)
+    return connection.query("SELECT * FROM role",
 }
 
 function getDepartment() {
-    return connection.query("SELECT * FROM department",)
+    return connection.query("SELECT * FROM department")
 }
 
 function addDepartment(name) {

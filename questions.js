@@ -29,6 +29,26 @@ function addMenu() {
     ])
 }
 
+function addRoleQuestions() {
+    return inquirer.prompt([
+        {
+            type: "input",
+            message: "Enter the title of the role:",
+            name: "title"
+        },
+        {
+            type: "input",
+            message: "Enter the salary of the role:",
+            name: "salary"
+        },
+        {
+            type: "input",
+            message: "Enter the department ID:",
+            name: "department_id"
+        }
+    ])
+}
+
 // View Questions
 function viewMenu() {
     return inquirer.prompt([
