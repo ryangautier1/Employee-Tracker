@@ -34,22 +34,34 @@ async function mainMenu() {
 async function handleView(choice) {
     switch (choice) {
         case "View departments":
-            //
+            // get departments here
+            console.table(departments)
+            mainMenu();
             break;
         case "View roles":
-            //
+            // get roles here
+            console.table(roles)
+            mainMenu();
             break;
         case "View an individual employee":
-            //
+            // get employees here
+            var answer = whichEmployee(employees, "view");
+            // get individual employee here
+            console.table(indEmployee)
+            mainMenu();
             break;
-        case ("View employees by manager"):
-            //
+        case "View employees by manager":
+            // get managers here
+            var answer = whichManager(managers, "view employees of");
+            // get results here
+            console.table(resutls)
+            mainMenu();
             break;
-        case ("View total utilized budget of a department"):
-            //
+        case "View total utilized budget of a department":
+            // add salaries together by department or something
             break;
-        case ("Back to main menu"):
-            //
+        case "Back to main menu":
+            mainMenu();
             break;
     }
 }
@@ -96,7 +108,7 @@ async function handleUpdate(choice) {
         case "Delete employee":
             // get employees here
             // var employees = 
-            var answer = questions.whichEmployee(employees);
+            var answer = questions.whichEmployee(employees, "delete");
             break;
         case "Back to main menu":
             mainMenu();

@@ -130,12 +130,12 @@ function whichRole(roles, action) {
     ])
 }
 
-function whichManager(managers) {
+function whichManager(managers, action) {
     return inquirer.prompt([
         {
             type: "list",
             name: "choice",
-            message: "Which manager would you like to update?",
+            message: `Which manager would you like to ${action}?`,
             choices: [managers]
         }
     ])
@@ -152,12 +152,12 @@ function whichDepartment(departments) {
     ])
 }
 
-function whichEmployee(employees) {
+function whichEmployee(employees, action) {
     return inquirer.prompt([
         {
             type: "list",
             name: "choice",
-            message: "Which employee would you like to delete?",
+            message: `Which employee would you like to ${action}?`,
             choices: [employees]
         }
     ])
