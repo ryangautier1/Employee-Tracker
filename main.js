@@ -29,7 +29,7 @@ async function mainMenu() {
             handleUpdate(answer.choice);
             break;
         case "Exit":
-            break;
+            process.exit();
     }
 }
 
@@ -37,13 +37,13 @@ async function handleView(choice) {
     switch (choice) {
         case "View departments":
             // get departments here
-            var departments = queryHelper.getDepartment();
+            var departments = await queryHelper.getDepartment();
             console.table(departments)
             mainMenu();
             break;
         case "View roles":
             // get roles here
-            var roles = queryHelper.getRoles();
+            var roles = await queryHelper.getRoles();
             console.table(roles)
             mainMenu();
             break;
@@ -59,9 +59,9 @@ async function handleView(choice) {
             // get managers here
             var managers = await queryHelper.getManagers();
             var answer = await questions.whichManager(managers, "view employees of");
-            var managerID = await queryHelper.getManagerId(answer);
-            var employees = await queryHelper.getEmployeesByManager(managerID);
-
+            var indManager = await queryHelper.getIndEmployee(answer);
+            console.table(indManager);
+            var employees = await queryHelper.getEmployeesByManager(indManager);
             // get results here
             console.table(employees)
             mainMenu();
@@ -81,15 +81,21 @@ async function handleAdd(choice) {
     switch (choice) {
         case "Add role":
             var answer = await questions.addRoleQuestions();
-            queryHelper.addRole(answer);
+            await queryHelper.addRole(answer);
             console.log("Role added!");
             mainMenu();
             break;
         case "Add employee":
             var answer = await questions.addEmployeeQuestions();
+            await queryHelper.addEmployee(answer);
+            console.log("Employee added!");
+            mainMenu();
             break;
         case "Add department":
             var answer = await questions.addDepartmentQuestions();
+            await queryHelper.addDepartment(answer);
+            console.log("Department added!");
+            mainMenu();
             break;
         case "Back to main menu":
             mainMenu();
@@ -101,22 +107,29 @@ async function handleUpdate(choice) {
     switch (choice) {
         case "Update employee role":
             // get roles here
-            // var roles = 
+            var roles = await queryHelper.getRoles();
             var answer = await questions.whichRole(roles, "update");
             break;
         case "Update employee manager":
-            // get managers here
-            // var managers = 
-            var answer = await questions.whichManager(managers, "update");
+            // get employees here
+            var employees = await queryHelper.getEmployees();
+            var managers = await queryHelper.getManagers();
+            var emp = await questions.whichEmployee(employees, "update");
+            var manager = await questions.whichManager(managers, "assign to this employee");
+            await queryHelper.updateManager(emp, manager);
+            console.log("Manager updated!");
+            mainMenu();
             break;
         case "Delete department":
             // get departments here
-            // var departments =
+            var departments = await queryHelper.getDepartment();
             var answer = await questions.whichDepartment(departments, "delete");
+            await queryHelper.deleteDepartment(answer);
+            console.log(`${answer.name} deleted!`);
             break;
         case "Delete role":
             // get roles here
-            // var roles = 
+            var roles = await queryHelper.getRoles();
             var answer = await questions.whichRole(roles, "delete");
             break;
         case "Delete employee":
