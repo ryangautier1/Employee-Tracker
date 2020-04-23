@@ -5,6 +5,10 @@ function getEmployees() {
     return connection.query("SELECT * FROM employee");
 }
 
+function getEmployeesByManager(input) {
+    return connection.query("SELECT * FROM employee WHERE manager_id = ?", [input]);
+}
+
 function getIndEmployee(answer) {
     var name = (answer.choice.split(" "));
     return connection.query("SELECT * FROM employee WHERE first_name = ? AND last_name = ?", [name[0], name[1]]);
@@ -12,6 +16,14 @@ function getIndEmployee(answer) {
 
 function getRoles() {
     return connection.query("SELECT * FROM role");
+}
+
+function getManagers() {
+    return connection.query("SELECT * FROM employee WHERE role_id = 1");
+}
+
+function getManagerId(manager) {
+    return connection.query("SELECT * FROM employee WHERE manager_id = ?", {manager_id: manager.manager_id})
 }
 
 function getDepartment() {
@@ -23,12 +35,12 @@ function addDepartment(answer) {
 }
 
 function addRole(answer) {
-    return connection.query("INSERT INTO role (title, salary, department_id) VALUES ?",
-    {
+    return connection.query("INSERT INTO role SET ?",
+    [{
         title: answer.title,
         salary: answer.salary,
-        department: answer.department
-    });
+        department_id: answer.department_id
+    }]);
 }
 
 function addEmployee(answer) {
@@ -45,8 +57,11 @@ module.exports = {
     getEmployees,
     getRoles,
     getDepartment,
+    getManagers,
     addDepartment,
     addRole,
     addEmployee,
-    getIndEmployee
+    getIndEmployee,
+    getManagerId,
+    getEmployeesByManager
 }

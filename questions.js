@@ -130,16 +130,19 @@ function whichRole(roles, action) {
     ])
 }
 
-function whichManager(managers, action) {
+function whichManager(employees, action) {
+    var names = employees.map(item => {if(item.role_id = 1){return item.first_name + " " + item.last_name}});
     return inquirer.prompt([
         {
             type: "list",
             name: "choice",
             message: `Which manager would you like to ${action}?`,
-            choices: [managers]
+            choices: names
         }
     ])
 }
+
+
 
 function whichDepartment(departments, action) {
     return inquirer.prompt([

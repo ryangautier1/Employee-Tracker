@@ -1,5 +1,6 @@
 const questions = require("./questions");
 const queryHelper = require("./queryHelper");
+const cTable = require('console.table');
 
 async function init() {
     try {
@@ -36,11 +37,13 @@ async function handleView(choice) {
     switch (choice) {
         case "View departments":
             // get departments here
+            var departments = queryHelper.getDepartment();
             console.table(departments)
             mainMenu();
             break;
         case "View roles":
             // get roles here
+            var roles = queryHelper.getRoles();
             console.table(roles)
             mainMenu();
             break;
@@ -54,9 +57,13 @@ async function handleView(choice) {
             break;
         case "View employees by manager":
             // get managers here
+            var managers = await queryHelper.getManagers();
             var answer = await questions.whichManager(managers, "view employees of");
+            var managerID = await queryHelper.getManagerId(answer);
+            var employees = await queryHelper.getEmployeesByManager(managerID);
+
             // get results here
-            console.table(resutls)
+            console.table(employees)
             mainMenu();
             break;
         case "View total utilized budget of a department":
@@ -74,6 +81,9 @@ async function handleAdd(choice) {
     switch (choice) {
         case "Add role":
             var answer = await questions.addRoleQuestions();
+            queryHelper.addRole(answer);
+            console.log("Role added!");
+            mainMenu();
             break;
         case "Add employee":
             var answer = await questions.addEmployeeQuestions();
