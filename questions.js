@@ -153,12 +153,13 @@ function whichDepartment(departments, action) {
 }
 
 function whichEmployee(employees, action) {
+    var names = employees.map(item => item.first_name + " " + item.last_name);
     return inquirer.prompt([
         {
             type: "list",
             name: "choice",
             message: `Which employee would you like to ${action}?`,
-            choices: [employees]
+            choices: names
         }
     ])
 }

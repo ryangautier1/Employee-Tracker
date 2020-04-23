@@ -1,4 +1,5 @@
 const questions = require("./questions");
+const queryHelper = require("./queryHelper");
 
 async function init() {
     try {
@@ -45,21 +46,22 @@ async function handleView(choice) {
             break;
         case "View an individual employee":
             // get employees here
-            var answer = whichEmployee(employees, "view");
-            // get individual employee here
-            console.table(indEmployee)
+            var employees = await queryHelper.getEmployees();
+            var answer = await questions.whichEmployee(employees, "view");
+            var indEmp = await queryHelper.getIndEmployee(answer);
+            console.table(indEmp);
             mainMenu();
             break;
         case "View employees by manager":
             // get managers here
-            var answer = whichManager(managers, "view employees of");
+            var answer = await questions.whichManager(managers, "view employees of");
             // get results here
             console.table(resutls)
             mainMenu();
             break;
         case "View total utilized budget of a department":
             // get departments here
-            var answer = whichDepartment(departments, "view the budget information of")
+            var answer = await questions.whichDepartment(departments, "view the budget information of")
             // add salaries together by department or something
             break;
         case "Back to main menu":
@@ -71,13 +73,13 @@ async function handleView(choice) {
 async function handleAdd(choice) {
     switch (choice) {
         case "Add role":
-            var answer = questions.addRoleQuestions();
+            var answer = await questions.addRoleQuestions();
             break;
         case "Add employee":
-            var answer = questions.addEmployeeQuestions();
+            var answer = await questions.addEmployeeQuestions();
             break;
         case "Add department":
-            var answer = questions.addDepartmentQuestions();
+            var answer = await questions.addDepartmentQuestions();
             break;
         case "Back to main menu":
             mainMenu();
@@ -90,27 +92,27 @@ async function handleUpdate(choice) {
         case "Update employee role":
             // get roles here
             // var roles = 
-            var answer = questions.whichRole(roles, "update");
+            var answer = await questions.whichRole(roles, "update");
             break;
         case "Update employee manager":
             // get managers here
             // var managers = 
-            var answer = questions.whichManager(managers, "update");
+            var answer = await questions.whichManager(managers, "update");
             break;
         case "Delete department":
             // get departments here
             // var departments =
-            var answer = questions.whichDepartment(departments, "delete");
+            var answer = await questions.whichDepartment(departments, "delete");
             break;
         case "Delete role":
             // get roles here
             // var roles = 
-            var answer = questions.whichRole(roles, "delete");
+            var answer = await questions.whichRole(roles, "delete");
             break;
         case "Delete employee":
             // get employees here
             // var employees = 
-            var answer = questions.whichEmployee(employees, "delete");
+            var answer = await questions.whichEmployee(employees, "delete");
             break;
         case "Back to main menu":
             mainMenu();
