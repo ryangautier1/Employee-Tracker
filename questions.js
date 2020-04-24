@@ -125,12 +125,13 @@ function updateMenu() {
 }
 
 function whichRole(roles, action) {
+    var names = roles.map(item => item.title);
     return inquirer.prompt([
         {
             type: "list",
             name: "choice",
             message: `Which role would you like to ${action}?`,
-            choices: [roles]
+            choices: names
         }
     ])
 }
@@ -150,12 +151,13 @@ function whichManager(employees, action) {
 
 
 function whichDepartment(departments, action) {
+    var names = departments.map(item => item.name);
     return inquirer.prompt([
         {
             type: "list",
             name: "choice",
             message: `Which department would you like to ${action}?`,
-            choices: [departments]
+            choices: names
         }
     ])
 }

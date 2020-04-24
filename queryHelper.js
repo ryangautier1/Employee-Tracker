@@ -15,6 +15,14 @@ function getIndEmployee(answer) {
     // return connection.query("SELECT title FROM role WHERE role_id = ?", [emp.role_id]);
 }
 
+function getIndDepartment(name) {
+    return connection.query("SELECT * FROM department WHERE ?", {name: name.choice});
+}
+
+function getIndRole(name) {
+    return connection.query("SELECT * FROM role WHERE ?", {title: name.choice});
+}
+
 function getEmployeeAndRole(answer) {
     return connection.query(`SELECT first_name, last_name FROM employee LEFT JOIN role ON ${answer.role_id} = role.role_id;`)
 }
@@ -74,11 +82,11 @@ function updateManager(emp, manager) {
 }
 
 function deleteDepartment(department) {
-    return connection.query("DELETE FROM department WHERE ?", {id: department.id});
+    return connection.query("DELETE FROM department WHERE ?", {id: department[0].id});
 }
 
 function deleteRole(input) {
-    return connection.query("DELETE FROM role WHERE ?", {id: input.id});
+    return connection.query("DELETE FROM role WHERE ?", {id: input[0].id});
 }
 
 module.exports = {
@@ -90,6 +98,8 @@ module.exports = {
     addRole,
     addEmployee,
     getIndEmployee,
+    getIndDepartment,
+    getIndRole,
     getManagerId,
     getEmployeesByManager,
     updateManager,

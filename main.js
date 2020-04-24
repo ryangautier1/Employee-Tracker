@@ -109,7 +109,7 @@ async function handleUpdate(choice) {
             var roles = await queryHelper.getRoles();
             var answer = await questions.whichRole(roles, "update");
             break;
-        case "Update employee manager": // *************
+        case "Update employee manager": // done
             // get employees here
             var employees = await queryHelper.getEmployees();
             var managers = await queryHelper.getManagers();
@@ -117,23 +117,27 @@ async function handleUpdate(choice) {
             var manager = await questions.whichManager(managers, "assign to this employee");
             var indEmployee = await queryHelper.getIndEmployee(emp);
             var indManager = await queryHelper.getIndEmployee(manager);
-            console.log(indManager[0]);
-            console.log(indEmployee[0]);
             await queryHelper.updateManager(indEmployee[0], indManager[0]);
             console.log("Manager updated!");
             mainMenu();
             break;
-        case "Delete department":
+        case "Delete department": // done
             // get departments here
             var departments = await queryHelper.getDepartment();
             var answer = await questions.whichDepartment(departments, "delete");
-            await queryHelper.deleteDepartment(answer);
-            console.log(`${answer.name} deleted!`);
+            var indDep = await queryHelper.getIndDepartment(answer);
+            await queryHelper.deleteDepartment(indDep);
+            console.log(`Deleted!`);
+            mainMenu();
             break;
-        case "Delete role":
+        case "Delete role": // done
             // get roles here
             var roles = await queryHelper.getRoles();
             var answer = await questions.whichRole(roles, "delete");
+            var indRole = await queryHelper.getIndRole(answer);
+            await queryHelper.deleteRole(indRole);
+            console.log(`Deleted!`);
+            mainMenu();
             break;
         case "Delete employee":
             // get employees here
