@@ -89,6 +89,10 @@ function deleteRole(input) {
     return connection.query("DELETE FROM role WHERE ?", {id: input[0].id});
 }
 
+function deleteEmployee(input) {
+    return connection.query("DELETE FROM employee WHERE ?", {id: input[0].id});
+}
+
 module.exports = {
     getEmployees,
     getRoles,
@@ -104,5 +108,6 @@ module.exports = {
     getEmployeesByManager,
     updateManager,
     deleteDepartment,
-    deleteRole
+    deleteRole,
+    deleteEmployee
 }

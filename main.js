@@ -47,7 +47,7 @@ async function handleView(choice) {
             console.table(roles)
             mainMenu();
             break;
-        case "View an individual employee": //***********************
+        case "View an individual employee": //***
             // get employees here
             var employees = await queryHelper.getEmployees();
             var answer = await questions.whichEmployee(employees, "view");
@@ -56,7 +56,7 @@ async function handleView(choice) {
             console.table(indEmpRole);
             mainMenu();
             break;
-        case "View employees by manager": //************************
+        case "View employees by manager": //***
             // get managers here
             var managers = await queryHelper.getManagers();
             var answer = await questions.whichManager(managers, "view employees of");
@@ -104,7 +104,7 @@ async function handleAdd(choice) {
 
 async function handleUpdate(choice) {
     switch (choice) {
-        case "Update employee role": // **************
+        case "Update employee role": // ***
             // get roles here
             var roles = await queryHelper.getRoles();
             var answer = await questions.whichRole(roles, "update");
@@ -139,10 +139,14 @@ async function handleUpdate(choice) {
             console.log(`Deleted!`);
             mainMenu();
             break;
-        case "Delete employee":
+        case "Delete employee": // done
             // get employees here
-            // var employees = 
+            var employees = await queryHelper.getEmployees();
             var answer = await questions.whichEmployee(employees, "delete");
+            var indEmp = await queryHelper.getIndEmployee(answer);
+            await queryHelper.deleteEmployee(indEmp);
+            console.log(`Deleted!`);
+            mainMenu();
             break;
         case "Back to main menu":
             mainMenu();
