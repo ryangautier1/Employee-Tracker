@@ -43,6 +43,11 @@ function addRoleQuestions() {
         },
         {
             type: "input",
+            message: "Enter the role ID:",
+            name: "role_id"
+        },
+        {
+            type: "input",
             message: "Enter the department ID:",
             name: "department_id"
         }

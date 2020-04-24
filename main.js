@@ -16,53 +16,52 @@ init();
 async function mainMenu() {
     var answer = await questions.mainMenu();
     switch (answer.choice) {
-        case "Add":
+        case "Add": // done
             answer = await questions.addMenu();
             handleAdd(answer.choice);
             break;
-        case "View":
+        case "View": // done
             answer = await questions.viewMenu();
             handleView(answer.choice);
             break;
-        case "Update/Delete":
+        case "Update/Delete": // done
             answer = await questions.updateMenu();
             handleUpdate(answer.choice);
             break;
-        case "Exit":
+        case "Exit": // done
             process.exit();
     }
 }
 
 async function handleView(choice) {
     switch (choice) {
-        case "View departments":
+        case "View departments": // done
             // get departments here
             var departments = await queryHelper.getDepartment();
             console.table(departments)
             mainMenu();
             break;
-        case "View roles":
+        case "View roles": // done
             // get roles here
             var roles = await queryHelper.getRoles();
             console.table(roles)
             mainMenu();
             break;
-        case "View an individual employee":
+        case "View an individual employee": //***********************
             // get employees here
             var employees = await queryHelper.getEmployees();
             var answer = await questions.whichEmployee(employees, "view");
             var indEmp = await queryHelper.getIndEmployee(answer);
-            console.table(indEmp);
+            var indEmpRole = await queryHelper.getEmployeeAndRole(indEmp);
+            console.table(indEmpRole);
             mainMenu();
             break;
-        case "View employees by manager":
+        case "View employees by manager": //************************
             // get managers here
             var managers = await queryHelper.getManagers();
             var answer = await questions.whichManager(managers, "view employees of");
             var indManager = await queryHelper.getIndEmployee(answer);
-            console.table(indManager);
-            var employees = await queryHelper.getEmployeesByManager(indManager);
-            // get results here
+            var employees = await queryHelper.getEmployeesByManager(indManager[0]);
             console.table(employees)
             mainMenu();
             break;

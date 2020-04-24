@@ -6,20 +6,25 @@ function getEmployees() {
 }
 
 function getEmployeesByManager(input) {
-    return connection.query("SELECT * FROM employee WHERE manager_id = ?", [input.manager_id]);
+    return connection.query("SELECT first_name, last_name, role_id FROM employee WHERE manager_id = ?", [input.manager_id]);
 }
 
 function getIndEmployee(answer) {
     var name = (answer.choice.split(" "));
     return connection.query("SELECT * FROM employee WHERE first_name = ? AND last_name = ?", [name[0], name[1]]);
+    // return connection.query("SELECT title FROM role WHERE role_id = ?", [emp.role_id]);
+}
+
+function getEmployeeAndRole(answer) {
+    return connection.query(`SELECT first_name, last_name FROM employee LEFT JOIN role ON ${answer.role_id} = role.role_id;`)
 }
 
 function getRoles() {
-    return connection.query("SELECT * FROM role");
+    return connection.query("SELECT title, salary FROM role");
 }
 
 function getManagers() {
-    return connection.query("SELECT * FROM employee WHERE role_id = 1");
+    return connection.query("SELECT * FROM employee WHERE role_id = 0");
 }
 
 function getManagerId(manager) {
@@ -40,6 +45,7 @@ function addRole(answer) {
     [{
         title: answer.title,
         salary: answer.salary,
+        role_id: answer.role_id,
         department_id: answer.department_id
     }]);
 }

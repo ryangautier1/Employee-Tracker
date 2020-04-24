@@ -9,9 +9,7 @@ const connection = mysql.createConnection({
     database: "employees_db"
 });
 
-connection.connect( () => {
-    console.log("Connected as " + connection.threadID);
-});
+connection.connect();
 
 connection.query = util.promisify(connection.query);
 
