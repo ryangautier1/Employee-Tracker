@@ -47,7 +47,7 @@ async function handleView(choice) {
             console.table(roles)
             mainMenu();
             break;
-        case "View an individual employee": //***
+        case "View an individual employee": // done
             // get employees here
             var employees = await queryHelper.getEmployees();
             var answer = await questions.whichEmployee(employees, "view");
@@ -104,7 +104,7 @@ async function handleAdd(choice) {
 
 async function handleUpdate(choice) {
     switch (choice) {
-        case "Update employee role": // ***
+        case "Update employee role": // done
             // get roles here
             var employees = await queryHelper.getEmployees();
             var emp = await questions.whichEmployee(employees, "update");

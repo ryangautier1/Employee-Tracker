@@ -24,7 +24,7 @@ function getIndRole(name) {
 }
 
 function getEmployeeAndRole(answer) {
-    return connection.query(`SELECT first_name, last_name, title FROM employee LEFT JOIN role ON employee.role_id = role.role_id;`)
+    return connection.query("SELECT first_name, last_name, title FROM employee LEFT JOIN role ON employee.role_id = role.role_id WHERE first_name = ? AND last_name = ?", [answer[0].first_name, answer[0].last_name]);
 }
 
 function getRoles() {
