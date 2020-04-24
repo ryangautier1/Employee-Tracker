@@ -104,18 +104,22 @@ async function handleAdd(choice) {
 
 async function handleUpdate(choice) {
     switch (choice) {
-        case "Update employee role":
+        case "Update employee role": // **************
             // get roles here
             var roles = await queryHelper.getRoles();
             var answer = await questions.whichRole(roles, "update");
             break;
-        case "Update employee manager":
+        case "Update employee manager": // *************
             // get employees here
             var employees = await queryHelper.getEmployees();
             var managers = await queryHelper.getManagers();
             var emp = await questions.whichEmployee(employees, "update");
             var manager = await questions.whichManager(managers, "assign to this employee");
-            await queryHelper.updateManager(emp, manager);
+            var indEmployee = await queryHelper.getIndEmployee(emp);
+            var indManager = await queryHelper.getIndEmployee(manager);
+            console.log(indManager[0]);
+            console.log(indEmployee[0]);
+            await queryHelper.updateManager(indEmployee[0], indManager[0]);
             console.log("Manager updated!");
             mainMenu();
             break;
