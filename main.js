@@ -70,7 +70,7 @@ async function handleView(choice) {
             var answer = await questions.whichDepartment(departments, "view the budget information of")
             // add salaries together by department or something
             break;
-        case "Back to main menu":
+        case "Back to main menu": // done
             mainMenu();
             break;
     }
@@ -78,25 +78,25 @@ async function handleView(choice) {
 
 async function handleAdd(choice) {
     switch (choice) {
-        case "Add role":
+        case "Add role": // done
             var answer = await questions.addRoleQuestions();
             await queryHelper.addRole(answer);
             console.log("Role added!");
             mainMenu();
             break;
-        case "Add employee":
+        case "Add employee": // done
             var answer = await questions.addEmployeeQuestions();
             await queryHelper.addEmployee(answer);
             console.log("Employee added!");
             mainMenu();
             break;
-        case "Add department":
+        case "Add department": // done
             var answer = await questions.addDepartmentQuestions();
             await queryHelper.addDepartment(answer);
             console.log("Department added!");
             mainMenu();
             break;
-        case "Back to main menu":
+        case "Back to main menu": //done
             mainMenu();
             break;
     }
