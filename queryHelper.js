@@ -24,7 +24,7 @@ function getIndRole(name) {
 }
 
 function getEmployeeAndRole(answer) {
-    return connection.query(`SELECT first_name, last_name FROM employee LEFT JOIN role ON ${answer.role_id} = role.role_id;`)
+    return connection.query(`SELECT first_name, last_name, title FROM employee LEFT JOIN role ON employee.role_id = role.role_id;`)
 }
 
 function getRoles() {
@@ -73,10 +73,22 @@ function updateManager(emp, manager) {
     return connection.query("UPDATE employee SET ? WHERE ?",
     [
         {
-            manager_id : manager.manager_id
+            manager_id : manager[0].manager_id
         },
         {
-            id: emp.id
+            id: emp[0].id
+        }
+    ]);
+}
+
+function updateRole(emp, answer) {
+    return connection.query("UPDATE employee SET ? WHERE ?",
+    [
+        {
+            role_id : answer[0].role_id
+        },
+        {
+            id: emp[0].id
         }
     ]);
 }
@@ -107,7 +119,9 @@ module.exports = {
     getManagerId,
     getEmployeesByManager,
     updateManager,
+    updateRole,
     deleteDepartment,
     deleteRole,
-    deleteEmployee
+    deleteEmployee,
+    getEmployeeAndRole
 }

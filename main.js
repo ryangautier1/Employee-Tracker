@@ -56,7 +56,7 @@ async function handleView(choice) {
             console.table(indEmpRole);
             mainMenu();
             break;
-        case "View employees by manager": //***
+        case "View employees by manager": //*** works but shows manager and roleid instead of role
             // get managers here
             var managers = await queryHelper.getManagers();
             var answer = await questions.whichManager(managers, "view employees of");
@@ -65,7 +65,7 @@ async function handleView(choice) {
             console.table(employees)
             mainMenu();
             break;
-        case "View total utilized budget of a department":
+        case "View total utilized budget of a department": // ***
             // get departments here
             var answer = await questions.whichDepartment(departments, "view the budget information of")
             // add salaries together by department or something
@@ -106,8 +106,15 @@ async function handleUpdate(choice) {
     switch (choice) {
         case "Update employee role": // ***
             // get roles here
+            var employees = await queryHelper.getEmployees();
+            var emp = await questions.whichEmployee(employees, "update");
+            var indEmployee = await queryHelper.getIndEmployee(emp);
             var roles = await queryHelper.getRoles();
-            var answer = await questions.whichRole(roles, "update");
+            var answer = await questions.whichRole(roles, "assign to this employee");
+            var indRole = await queryHelper.getIndRole(answer);
+            await queryHelper.updateRole(indEmployee, indRole);
+            console.log("Role updated");
+            mainMenu();
             break;
         case "Update employee manager": // done
             // get employees here
@@ -117,7 +124,7 @@ async function handleUpdate(choice) {
             var manager = await questions.whichManager(managers, "assign to this employee");
             var indEmployee = await queryHelper.getIndEmployee(emp);
             var indManager = await queryHelper.getIndEmployee(manager);
-            await queryHelper.updateManager(indEmployee[0], indManager[0]);
+            await queryHelper.updateManager(indEmployee, indManager);
             console.log("Manager updated!");
             mainMenu();
             break;
